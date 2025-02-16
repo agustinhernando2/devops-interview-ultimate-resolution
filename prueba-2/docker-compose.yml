@@ -1,0 +1,40 @@
+version: '3.8'
+services:
+  backend:
+    build: 
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8000:8000
+    environment:
+      - SQL_HOST=db
+      - DJANGO_ALLOWED_HOSTS=*
+      - DEBUG=0
+    depends_on:
+      - db
+    command: ./backend-launcher.sh
+    volumes:
+      - ./backend:/usr/src/app
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend:/usr/src/app
+  db:
+    container_name: database
+    image: postgres:12.0-alpine
+    environment:
+      - POSTGRES_USER=${SQL_USER}
+      - POSTGRES_PASSWORD=${SQL_PASSWORD}
+      - POSTGRES_DB=${SQL_DATABASE}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+volumes:
+  postgres_data:
+  static:
+  media:

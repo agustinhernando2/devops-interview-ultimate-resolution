@@ -2,10 +2,13 @@
 """Django's command-line utility for administrative tasks."""
 import os
 import sys
-
+from dotenv import load_dotenv
 
 
 def main():
+    """Load env file"""
+    load_dotenv()
+    
     """Run env file check"""
     if not "SQL_DATABASE" in os.environ:
         raise Exception(
