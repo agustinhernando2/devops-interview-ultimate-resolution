@@ -14,6 +14,7 @@ jobs:
         password: ${{ secrets.DOCKER_PASSWORD }}
         repository: ${{ github.repository }}
         context: prueba-3
+        push: true
         tag_with_ref: true
         tag_with_sha: true
         tags: ${{ github.sha }}
