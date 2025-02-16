@@ -142,19 +142,15 @@ docker rmi <image-id>
 ```
 
 ### En AWS
-#### Pre-requisitos:
-Tener una cuenta de AWS.
-
-#### Pasos para el Despliegue:
-- 1. Crear una instancia EC2
-- 2. Crear el security group habilitando el acceso a internet.
-- 3. Crear un RSA key pair para posteriormente utilizarlo para conectarnos a la VM. file name: agustin-msi-ssh.
-- 4. Conectarse a la maquina mediante ssh.
-    - para esto debemos instalar el cliente de aws:
+- Crear una instancia EC2
+- Crear el security group habilitando el acceso a internet.
+- Crear un RSA key pair para posteriormente utilizarlo para conectarnos a la VM. file name: agustin-msi-ssh.
+- Conectarse a la maquina mediante ssh.
+- Para esto debemos instalar el cliente de aws:
 ```bash
 brew install awscli
 ```
-    - En la web, vamos a instances -> instancia Generada  -> connect -> SSH Client, ejecuta los pasos que te recomienda. Ej:
+- En la web, vamos a instances -> instancia Generada  -> connect -> SSH Client, ejecuta los pasos que te recomienda. Ej:
 ```bash
     Instance ID
 
@@ -174,7 +170,8 @@ brew install awscli
     ssh -i "agustin-msi-ssh.pem" ubuntu@ec2-54-174-102-162.compute-1.amazonaws.com
 ```
 
-    - Ejecutar los siguiente comandos ó utilizar un userData:
+- Ejecutar los siguiente comandos ó utilizar un userData:
+
 ```bash
     # Add Docker's official GPG key:
     sudo apt-get update
@@ -203,4 +200,5 @@ brew install awscli
     docker compose build
     docker compose up -d
 ```
-- 5. Luego buscar el security group donde se encuentra nuestra VM y abrir el puerto 3000.
+- Luego buscar el security group donde se encuentra nuestra VM y abrir el puerto 3000.
+- Ya podemos acceder a la ip publica al puerto 3000 donde se expone nuestro frontend. Ejemplo: http://54.174.102.162:3000
