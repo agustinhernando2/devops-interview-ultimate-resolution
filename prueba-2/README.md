@@ -149,7 +149,7 @@ Tener una cuenta de AWS.
 - 1. Crear una instancia EC2
 - 2. Crear el security group habilitando el acceso a internet.
 - 3. Crear un RSA key pair para posteriormente utilizarlo para conectarnos a la VM. file name: agustin-msi-ssh.
-- 3. Conectarse a la maquina mediante ssh.
+- 4. Conectarse a la maquina mediante ssh.
     - para esto debemos instalar el cliente de aws:
 ```bash
 brew install awscli
@@ -174,6 +174,33 @@ brew install awscli
     ssh -i "agustin-msi-ssh.pem" ubuntu@ec2-54-174-102-162.compute-1.amazonaws.com
 ```
 
-- 4. Luego buscar la ip de la instancia, y abrir el puerto 3000 de esa ip en el navegador.
+    - Ejecutar los siguiente comandos ó utilizar un userData:
+```bash
+    # Add Docker's official GPG key:
+    sudo apt-get update
+    sudo apt-get install ca-certificates curl
+    sudo install -m 0755 -d /etc/apt/keyrings
+    sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+    sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-   
+    # Add the repository to Apt sources:
+    echo \
+    "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+    $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+    sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+    sudo apt-get update
+
+
+    sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+    git clone --single-branch --branch activity-2 https://github.com/agustinhernando2/devops-interview-ultimate-resolution.git
+    cd devops-interview-ultimate-resolution/prueba-2
+    # Add your user to the docker group:
+    sudo usermod -aG docker $USER
+    # Log in to the new docker group (to avoid having to log out and log in again; but if not enough, try to reboot):
+    newgrp docker
+    cp backend/.env_example backend/.env
+    export NODE_OPTIONS="--max-old-space-size=8192"
+    docker compose build
+    docker compose up -d
+```
+- 5. Luego buscar el security group donde se encuentra nuestra VM y abrir el puerto 3000.

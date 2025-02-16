@@ -1,5 +1,5 @@
 #!/bin/sh
-sleep(3)
+sleep 10
 echo "Starting migrations..."
 python manage.py migrate
 echo "Starting server..."
