@@ -112,6 +112,17 @@ jobs:
     </body>
 </html>%
 ```
+<p align="center">
+  <img src="img/img1.png"/>
+</p>
+
+<p align="center">
+  <img src="img/img2.png"/>
+</p>
+
+Se puede observar como el actions fuerza un nuevo deploy, cuando este finaliza el contenedor viejo es frenado y se pone en produccion uno nuevo con la imagen actualizada, modificando tambien la ip-public.
+
+
 ### Enlaces Útiles
-[build-push-action](https://github.com/docker/build-push-action?tab=readme-ov-file#path-context)
-[Desplegar hacia Amazon Elastic Container Service](https://docs.github.com/es/enterprise-cloud@latest/actions/use-cases-and-examples/deploying/deploying-to-amazon-elastic-container-service)
+- [build-push-action](https://github.com/docker/build-push-action?tab=readme-ov-file#path-context)
+- [Desplegar hacia Amazon Elastic Container Service](https://docs.github.com/es/enterprise-cloud@latest/actions/use-cases-and-examples/deploying/deploying-to-amazon-elastic-container-service)
