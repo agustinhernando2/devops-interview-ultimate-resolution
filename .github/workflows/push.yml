@@ -34,7 +34,7 @@ jobs:
       with:
         context: prueba-3
         push: true
-        tags: ${{ secrets.DOCKER_REPOSITORY }}:${{ github.sha }}
+        tags: ${{ secrets.DOCKER_REPOSITORY }}:latest
     - 
       name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
