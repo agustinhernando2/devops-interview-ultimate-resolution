@@ -48,5 +48,4 @@ jobs:
         aws ecs update-service \
           --cluster  ${{ env.ECS_CLUSTER }} \
           --service ${{ env.ECS_SERVICE }} \
-          --task-definition ${{ env.ECS_TASK_DEFINITION }}:${{ env.SHA }} \
           --force-new-deployment
