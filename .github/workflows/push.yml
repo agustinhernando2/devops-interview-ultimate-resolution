@@ -1,6 +1,16 @@
 name: GitHub Actions Demo
 run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+on: 
+  push:
+    branches:
+      - main
+    paths:
+      - prueba-3/index.html
+env:
+  AWS_REGION: us-east-1
+  ECS_SERVICE: app
+  ECS_CLUSTER: cluster-010101
+  ECS_TASK_DEFINITION: nginx-task 
 jobs:
   deploy:
     name: deploy to cluster 
@@ -25,3 +35,19 @@ jobs:
         context: prueba-3
         push: true
         tags: ${{ secrets.DOCKER_REPOSITORY }}:${{ github.sha }}
+    - 
+      name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ env.AWS_REGION }}
+
+    -
+      name: Update ECS service to force new deployment
+        run: |
+          # Force a new deployment of the ECS service
+          aws ecs update-service \
+            --cluster  ${{ env.ECS_CLUSTER }} \
+            --service ${{ env.ECS_SERVICE }} \
+            --force-new-deployment
