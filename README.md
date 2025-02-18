@@ -1,4 +1,5 @@
 # Craftech prueba tecnica 2025
+[![GitHub Actions Demo](https://github.com/agustinhernando2/devops-interview-ultimate-resolution/actions/workflows/push.yml/badge.svg)](https://github.com/agustinhernando2/devops-interview-ultimate-resolution/actions/workflows/push.yml)
 
 ## Prueba 1 - Diagrama de Red 
 Produzca un diagrama de red (puede utilizar lucidchart) de una aplicación web en GCP o AWS y escriba una descripción de texto de 1/2 a 1 página de sus elecciones y arquitectura.
